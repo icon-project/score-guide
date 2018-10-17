@@ -1,0 +1,36 @@
+# Github pages for SCORE Guide
+
+> ### https://icon-project.github.io/score-guide
+
+#### Contents
+
+- [Deep into the SCORE](https://icon-project.github.io/score-guide/deep-into-the-score.html)
+  - [Token & Crowdsale](https://icon-project.github.io/score-guide/deep-into-the-score.html#token-crowdsale)
+- [Syntax](https://icon-project.github.io/score-guide/syntax.html)
+  - [Type hints](https://icon-project.github.io/score-guide/syntax.html#type-hints)
+  - [Exception handling](https://icon-project.github.io/score-guide/syntax.html#exception-handling)
+  - [IconScoreBase (The highest parent class)](https://icon-project.github.io/score-guide/syntax.html#iconscorebase-the-highest-parent-class)
+  - [__init__](https://icon-project.github.io/score-guide/syntax.html#init)
+  - [on_install](https://icon-project.github.io/score-guide/syntax.html#on-install)
+  - [VarDB, DictDB, ArrayDB](https://icon-project.github.io/score-guide/syntax.html#vardb-dictdb-arraydb)
+    - [VarDB(‘key’, ‘target db’, ‘return type’)](https://icon-project.github.io/score-guide/syntax.html#vardb-key-target-db-return-type)
+    - [DictDB(‘key’, ‘target db’, ‘return type’, ‘dict depth (default is 1)’)](https://icon-project.github.io/score-guide/syntax.html#dictdb-key-target-db-return-type-dict-depth-default-is-1)
+    - [ArrayDB(‘key’, ‘target db’, ‘return type’)](https://icon-project.github.io/score-guide/syntax.html#arraydb-key-target-db-return-type)
+  - [external decorator (@external)](https://icon-project.github.io/score-guide/syntax.html#external-decorator-external)
+  - [payable decorator (@payable)](https://icon-project.github.io/score-guide/syntax.html#payable-decorator-payable)
+  - [eventlog decorator (@eventlog)](https://icon-project.github.io/score-guide/syntax.html#eventlog-decorator-eventlog)
+  - [fallback](https://icon-project.github.io/score-guide/syntax.html#fallback)
+  - [InterfaceScore](https://icon-project.github.io/score-guide/syntax.html#interfacescore)
+- [Limitations](https://icon-project.github.io/score-guide/limitation.html)
+- [API References](https://icon-project.github.io/score-guide/api-references.html)
+  - [Classes](https://icon-project.github.io/score-guide/classes.html)
+    - [IconScoreBase](https://icon-project.github.io/score-guide/classes.iconscorebase.html)
+    - [Address](https://icon-project.github.io/score-guide/classes.address.html)
+    - [AddressPrefix](https://icon-project.github.io/score-guide/classes.addressprefix.html)
+    - [Transaction](https://icon-project.github.io/score-guide/classes.transaction.html)
+    - [Icx](https://icon-project.github.io/score-guide/classes.icx.html)
+    - [IconScoreDatabase](https://icon-project.github.io/score-guide/classes.db.html)
+    - [ArrayDB](https://icon-project.github.io/score-guide/classes.arraydb.html)
+    - [DictDB](https://icon-project.github.io/score-guide/classes.dictdb.html)
+    - [VarDB](https://icon-project.github.io/score-guide/classes.vardb.html)
+  - [Global Functions](https://icon-project.github.io/score-guide/global-functions.html)
