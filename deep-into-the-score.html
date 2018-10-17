@@ -1,0 +1,600 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deep into the SCORE &mdash; ICON Smart Contract - SCORE  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Syntax" href="syntax.html" />
+    <link rel="prev" title="ICON Smart Contract - SCORE" href="index.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ICON Smart Contract - SCORE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Deep into the SCORE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#token-crowdsale">Token &amp; Crowdsale</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="syntax.html">Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="limitation.html">Limitations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api-references.html">API References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ICON Smart Contract - SCORE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Deep into the SCORE</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/deep-into-the-score.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deep-into-the-score">
+<h1>Deep into the SCORE<a class="headerlink" href="#deep-into-the-score" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="token-crowdsale">
+<h2>Token &amp; Crowdsale<a class="headerlink" href="#token-crowdsale" title="Permalink to this headline">¶</a></h2>
+<p>This document will explain how to write SCOREs with T-Bears framework.
+Let’s start by creating a simple token contract. You can create an empty
+project using <code class="docutils literal notranslate"><span class="pre">init</span></code> command. Suppose your project name is
+‘sample_token’ and the main class name is ‘SampleToken’.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tbears init sample_token SampleToken
+</pre></div>
+</div>
+<p>Above command will create a project folder, <code class="docutils literal notranslate"><span class="pre">sample_token</span></code>, and
+generate <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>, <code class="docutils literal notranslate"><span class="pre">sample_token.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">package.json</span></code>
+files in the folder. <code class="docutils literal notranslate"><span class="pre">sample_token.py</span></code> has the main class declaration
+whose name is <code class="docutils literal notranslate"><span class="pre">SampleToken</span></code>. You need to implement <code class="docutils literal notranslate"><span class="pre">SampleToken</span></code>
+class.</p>
+<p>IRC-2 standard defines the common behavior of tokens running on ICON.
+IRC-2 compliant token must implement following methods. The
+specification is here,
+<a class="reference external" href="https://github.com/icon-project/IIPs/blob/master/IIPS/iip-2.md">IRC-2</a>.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@external</span><span class="p">(</span><span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+<span class="nd">@external</span><span class="p">(</span><span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+<span class="nd">@external</span><span class="p">(</span><span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">decimals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+
+<span class="nd">@external</span><span class="p">(</span><span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">totalSupply</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+
+<span class="nd">@external</span><span class="p">(</span><span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">balanceOf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_owner</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+
+<span class="nd">@external</span>
+<span class="k">def</span> <span class="nf">transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_to</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_data</span><span class="p">:</span> <span class="nb">bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Below is a complete token implementation. You can copy and paste it to
+fill your <code class="docutils literal notranslate"><span class="pre">sample_token.py</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">TokenFallbackInterface</span></code> is
+declared in the beginning to interact with <code class="docutils literal notranslate"><span class="pre">SampleCrowdsale</span></code> contract
+defined later. (In fact, <code class="docutils literal notranslate"><span class="pre">tbears</span> <span class="pre">samples</span></code> command will generate the
+two sample projects, <code class="docutils literal notranslate"><span class="pre">standard_token</span></code> and <code class="docutils literal notranslate"><span class="pre">standard_crowdsale</span></code>, with
+the complete source code provided. However, we used <code class="docutils literal notranslate"><span class="pre">init</span></code> command
+here to illustrate how to create a new project.)</p>
+<p>When you deploy the contract, <code class="docutils literal notranslate"><span class="pre">on_install</span></code> method is called. You can
+pass the amount of initial tokens to the parameter <code class="docutils literal notranslate"><span class="pre">initialSupply</span></code>,
+and, in this example, 100% of initial tokens go to the contract owner.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iconservice</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">TAG</span> <span class="o">=</span> <span class="s1">&#39;SampleToken&#39;</span>
+
+
+<span class="c1"># An interface of ICON Token Standard, IRC-2</span>
+<span class="k">class</span> <span class="nc">TokenStandard</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">decimals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">totalSupply</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">balanceOf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_owner</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_to</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_data</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="c1"># An interface of tokenFallback.</span>
+<span class="c1"># Receiving SCORE that has implemented this interface can handle</span>
+<span class="c1"># the receiving or further routine.</span>
+<span class="k">class</span> <span class="nc">TokenFallbackInterface</span><span class="p">(</span><span class="n">InterfaceScore</span><span class="p">):</span>
+    <span class="nd">@interface</span>
+    <span class="k">def</span> <span class="nf">tokenFallback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_from</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">SampleToken</span><span class="p">(</span><span class="n">IconScoreBase</span><span class="p">,</span> <span class="n">TokenStandard</span><span class="p">):</span>
+
+    <span class="n">_BALANCES</span> <span class="o">=</span> <span class="s1">&#39;balances&#39;</span>
+    <span class="n">_TOTAL_SUPPLY</span> <span class="o">=</span> <span class="s1">&#39;total_supply&#39;</span>
+    <span class="n">_DECIMALS</span> <span class="o">=</span> <span class="s1">&#39;decimals&#39;</span>
+
+    <span class="nd">@eventlog</span><span class="p">(</span><span class="n">indexed</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">Transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_from</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_to</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">IconScoreDatabase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_total_supply</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_TOTAL_SUPPLY</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_decimals</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_DECIMALS</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span> <span class="o">=</span> <span class="n">DictDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_BALANCES</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_install</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_initialSupply</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_decimals</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">on_install</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">_initialSupply</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">revert</span><span class="p">(</span><span class="s2">&quot;Initial supply cannot be less than zero&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_decimals</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">revert</span><span class="p">(</span><span class="s2">&quot;Decimals cannot be less than zero&quot;</span><span class="p">)</span>
+
+        <span class="n">total_supply</span> <span class="o">=</span> <span class="n">_initialSupply</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">_decimals</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;on_install: total_supply=</span><span class="si">{total_supply}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_total_supply</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">total_supply</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_decimals</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">_decimals</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_supply</span>
+
+    <span class="k">def</span> <span class="nf">on_update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">on_update</span><span class="p">()</span>
+
+    <span class="nd">@external</span><span class="p">(</span><span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;SampleToken&quot;</span>
+
+    <span class="nd">@external</span><span class="p">(</span><span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;ST&quot;</span>
+
+    <span class="nd">@external</span><span class="p">(</span><span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">decimals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decimals</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+    <span class="nd">@external</span><span class="p">(</span><span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">totalSupply</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_supply</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+    <span class="nd">@external</span><span class="p">(</span><span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">balanceOf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_owner</span><span class="p">:</span> <span class="n">Address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span><span class="p">[</span><span class="n">_owner</span><span class="p">]</span>
+
+    <span class="nd">@external</span>
+    <span class="k">def</span> <span class="nf">transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_to</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_data</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_data</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;None&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transfer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">_to</span><span class="p">,</span> <span class="n">_value</span><span class="p">,</span> <span class="n">_data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_from</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_to</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+
+        <span class="c1"># Checks the sending value and balance.</span>
+        <span class="k">if</span> <span class="n">_value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">revert</span><span class="p">(</span><span class="s2">&quot;Transferring value cannot be less than zero&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span><span class="p">[</span><span class="n">_from</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">_value</span><span class="p">:</span>
+            <span class="n">revert</span><span class="p">(</span><span class="s2">&quot;Out of balance&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span><span class="p">[</span><span class="n">_from</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span><span class="p">[</span><span class="n">_from</span><span class="p">]</span> <span class="o">-</span> <span class="n">_value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span><span class="p">[</span><span class="n">_to</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span><span class="p">[</span><span class="n">_to</span><span class="p">]</span> <span class="o">+</span> <span class="n">_value</span>
+
+        <span class="k">if</span> <span class="n">_to</span><span class="o">.</span><span class="n">is_contract</span><span class="p">:</span>
+            <span class="c1"># If the recipient is SCORE,</span>
+            <span class="c1">#   then calls `tokenFallback` to hand over control.</span>
+            <span class="n">recipient_score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_interface_score</span><span class="p">(</span><span class="n">_to</span><span class="p">,</span> <span class="n">TokenFallbackInterface</span><span class="p">)</span>
+            <span class="n">recipient_score</span><span class="o">.</span><span class="n">tokenFallback</span><span class="p">(</span><span class="n">_from</span><span class="p">,</span> <span class="n">_value</span><span class="p">,</span> <span class="n">_data</span><span class="p">)</span>
+
+        <span class="c1"># Emits an event log `Transfer`</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Transfer</span><span class="p">(</span><span class="n">_from</span><span class="p">,</span> <span class="n">_to</span><span class="p">,</span> <span class="n">_value</span><span class="p">,</span> <span class="n">_data</span><span class="p">)</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Transfer(</span><span class="si">{_from}</span><span class="s1">, </span><span class="si">{_to}</span><span class="s1">, </span><span class="si">{_value}</span><span class="s1">, </span><span class="si">{_data}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, we are going to write a crowdsale contract using above token. Let’s
+create a new project for the crowdsale contract.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tbears init sample_crowdsale SampleCrowdsale
+</pre></div>
+</div>
+<p>Our crowdsale contract will do the following.</p>
+<ul class="simple">
+<li>Exchange ratio to ICX is 1:1. Crowdsale target, token contract
+address, and its duration are set when the contract is first
+deployed.</li>
+<li><code class="docutils literal notranslate"><span class="pre">total_joiner_count</span></code> function returns the number of contributors,
+and <code class="docutils literal notranslate"><span class="pre">check_goal_reached</span></code> function tests if the crowdsale target has
+been met.</li>
+<li>After the crowdsale finished, <code class="docutils literal notranslate"><span class="pre">safe_withdrawal</span></code> function transfers
+the fund to the beneficiary, contract owner in this example, if the
+sales target has been met. If sales target failed, each contributors
+can withdraw their contributions back.</li>
+</ul>
+<p>Again, complete source is given below. Note that crowdsale duration is
+given in number of blocks, because SCORE logic must be deterministic
+across nodes, thus it must not rely on clock time.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">iconservice</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">TAG</span> <span class="o">=</span> <span class="s1">&#39;SampleCrowdsale&#39;</span>
+
+
+<span class="c1"># An interface of token to give a reward to anyone who contributes</span>
+<span class="k">class</span> <span class="nc">TokenInterface</span><span class="p">(</span><span class="n">InterfaceScore</span><span class="p">):</span>
+    <span class="nd">@interface</span>
+    <span class="k">def</span> <span class="nf">transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_to</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_data</span><span class="p">:</span> <span class="nb">bytes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">SampleCrowdsale</span><span class="p">(</span><span class="n">IconScoreBase</span><span class="p">):</span>
+
+    <span class="n">_ADDR_BENEFICIARY</span> <span class="o">=</span> <span class="s1">&#39;addr_beneficiary&#39;</span>
+    <span class="n">_ADDR_TOKEN_SCORE</span> <span class="o">=</span> <span class="s1">&#39;addr_token_score&#39;</span>
+    <span class="n">_FUNDING_GOAL</span> <span class="o">=</span> <span class="s1">&#39;funding_goal&#39;</span>
+    <span class="n">_AMOUNT_RAISED</span> <span class="o">=</span> <span class="s1">&#39;amount_raised&#39;</span>
+    <span class="n">_DEAD_LINE</span> <span class="o">=</span> <span class="s1">&#39;dead_line&#39;</span>
+    <span class="n">_PRICE</span> <span class="o">=</span> <span class="s1">&#39;price&#39;</span>
+    <span class="n">_BALANCES</span> <span class="o">=</span> <span class="s1">&#39;balances&#39;</span>
+    <span class="n">_JOINER_LIST</span> <span class="o">=</span> <span class="s1">&#39;joiner_list&#39;</span>
+    <span class="n">_FUNDING_GOAL_REACHED</span> <span class="o">=</span> <span class="s1">&#39;funding_goal_reached&#39;</span>
+    <span class="n">_CROWDSALE_CLOSED</span> <span class="o">=</span> <span class="s1">&#39;crowdsale_closed&#39;</span>
+
+    <span class="nd">@eventlog</span><span class="p">(</span><span class="n">indexed</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">FundTransfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backer</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">is_contribution</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@eventlog</span><span class="p">(</span><span class="n">indexed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">GoalReached</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">total_amount_raised</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">IconScoreDatabase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addr_beneficiary</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ADDR_BENEFICIARY</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="n">Address</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addr_token_score</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ADDR_TOKEN_SCORE</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="n">Address</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_funding_goal</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_FUNDING_GOAL</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_amount_raised</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_AMOUNT_RAISED</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dead_line</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_DEAD_LINE</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_price</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_PRICE</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span> <span class="o">=</span> <span class="n">DictDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_BALANCES</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_joiner_list</span> <span class="o">=</span> <span class="n">ArrayDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_JOINER_LIST</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="n">Address</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_funding_goal_reached</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_FUNDING_GOAL_REACHED</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_crowdsale_closed</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CROWDSALE_CLOSED</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_install</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_fundingGoalInIcx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_tokenScore</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_durationInBlocks</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Called when this SCORE first deployed.</span>
+
+<span class="sd">        :param _fundingGoalInIcx: The funding goal of this crowdsale, in ICX</span>
+<span class="sd">        :param _tokenScore: SCORE address of token that will be used for the rewards</span>
+<span class="sd">        :param _durationInBlocks: the sale duration is given in number of blocks</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">on_install</span><span class="p">()</span>
+
+        <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;on_install: fundingGoalInIcx=</span><span class="si">{_fundingGoalInIcx}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;on_install: tokenScore=</span><span class="si">{_tokenScore}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;on_install: durationInBlocks=</span><span class="si">{_durationInBlocks}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_fundingGoalInIcx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">revert</span><span class="p">(</span><span class="s2">&quot;Funding goal cannot be less than zero&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_durationInBlocks</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">revert</span><span class="p">(</span><span class="s2">&quot;Duration cannot be less than zero&quot;</span><span class="p">)</span>
+
+        <span class="c1"># The exchange ratio to ICX is 1:1</span>
+        <span class="n">icx_cost_of_each_token</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addr_beneficiary</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addr_token_score</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">_tokenScore</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_funding_goal</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">_fundingGoalInIcx</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dead_line</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">height</span> <span class="o">+</span> <span class="n">_durationInBlocks</span><span class="p">)</span>
+        <span class="n">price</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">icx_cost_of_each_token</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_price</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_funding_goal_reached</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_crowdsale_closed</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Crowdsale closed by default</span>
+
+    <span class="k">def</span> <span class="nf">on_update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">on_update</span><span class="p">()</span>
+
+    <span class="nd">@external</span>
+    <span class="k">def</span> <span class="nf">tokenFallback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_from</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Implements `tokenFallback` in order for the SCORE</span>
+<span class="sd">        to receive initial tokens to reward to the contributors</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Checks if the caller is a Token SCORE address that this SCORE is interested in.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addr_token_score</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+            <span class="n">revert</span><span class="p">(</span><span class="s2">&quot;Unknown token address&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Depositing tokens can only be done by owner</span>
+        <span class="k">if</span> <span class="n">_from</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">owner</span><span class="p">:</span>
+            <span class="n">revert</span><span class="p">(</span><span class="s2">&quot;Invalid sender&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">revert</span><span class="p">(</span><span class="s2">&quot;Depositing value cannot be less than zero&quot;</span><span class="p">)</span>
+
+        <span class="c1"># start Crowdsale hereafter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_crowdsale_closed</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;tokenFallback: token supply = &quot;</span><span class="si">{_value}</span><span class="s1">&quot;&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+
+    <span class="nd">@payable</span>
+    <span class="k">def</span> <span class="nf">fallback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Called when anyone sends funds to the SCORE.</span>
+<span class="sd">        This SCORE regards it as a contribution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_crowdsale_closed</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+            <span class="n">revert</span><span class="p">(</span><span class="s1">&#39;Crowdsale is closed.&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Accepts the contribution</span>
+        <span class="n">amount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">+</span> <span class="n">amount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_amount_raised</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_amount_raised</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">+</span> <span class="n">amount</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">amount</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_price</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;called from Crowdsale&#39;</span>
+
+        <span class="c1"># Gives tokens to the contributor as a reward</span>
+        <span class="n">token_score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_interface_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_addr_token_score</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">TokenInterface</span><span class="p">)</span>
+        <span class="n">token_score</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_joiner_list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_joiner_list</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">FundTransfer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;FundTransfer(</span><span class="si">{self.msg.sender}</span><span class="s1">, </span><span class="si">{amount}</span><span class="s1">, True)&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+
+    <span class="nd">@external</span><span class="p">(</span><span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">totalJoinerCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the number of contributors.</span>
+
+<span class="sd">        :return: the number of contributors</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_joiner_list</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_after_dead_line</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="c1"># Checks if it has been reached to the deadline block</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;after_dead_line: block.height = </span><span class="si">{self.block.height}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;after_dead_line: dead_line()  = {self._dead_line.get()}&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="o">.</span><span class="n">height</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dead_line</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+    <span class="nd">@external</span>
+    <span class="k">def</span> <span class="nf">checkGoalReached</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the goal has been reached and ends the campaign.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_dead_line</span><span class="p">():</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amount_raised</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funding_goal</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_funding_goal_reached</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">GoalReached</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_addr_beneficiary</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amount_raised</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+                <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Goal reached!&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_crowdsale_closed</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nd">@external</span>
+    <span class="k">def</span> <span class="nf">safeWithdrawal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Withdraws the funds.</span>
+
+<span class="sd">        If the funding goal has been reached, sends the entire amount to the beneficiary.</span>
+<span class="sd">        If the goal was not reached, each contributor can withdraw the amount they contributed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after_dead_line</span><span class="p">():</span>
+            <span class="c1"># each contributor can withdraw the amount they contributed if the goal was not reached</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funding_goal_reached</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+                <span class="n">amount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">icx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">FundTransfer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                        <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;FundTransfer(</span><span class="si">{self.msg.sender}</span><span class="s1">, </span><span class="si">{amount}</span><span class="s1">, False)&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_balances</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">amount</span>
+
+            <span class="c1"># The sales target has been met. Owner can withdraw the contribution.</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_funding_goal_reached</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addr_beneficiary</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">icx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_addr_beneficiary</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amount_raised</span><span class="o">.</span><span class="n">get</span><span class="p">()):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">FundTransfer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_addr_beneficiary</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amount_raised</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="kc">False</span><span class="p">)</span>
+                    <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;FundTransfer({self._addr_beneficiary.get()},&#39;</span>
+                                 <span class="n">f</span><span class="s1">&#39;{self._amount_raised.get()}, False)&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># if the transfer to beneficiary fails, unlock contributors balance</span>
+                    <span class="n">Logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Failed to send to beneficiary!&#39;</span><span class="p">,</span> <span class="n">TAG</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_funding_goal_reached</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="syntax.html" class="btn btn-neutral float-right" title="Syntax" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="ICON Smart Contract - SCORE" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, ICON Foundation
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
