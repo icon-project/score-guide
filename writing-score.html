@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Writing SCORE &mdash; ICON Smart Contract - SCORE  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Limitations" href="limitation.html" />
+    <link rel="prev" title="SCORE by example" href="score-by-example.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ICON Smart Contract - SCORE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="score-by-example.html">SCORE by example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Writing SCORE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#type-hints">Type hints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exception-handling">Exception handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iconscorebase-the-highest-parent-class">IconScoreBase (The highest parent class)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#init">__init__</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#on-install">on_install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vardb-dictdb-arraydb">VarDB, DictDB, ArrayDB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vardb-key-target-db-return-type">VarDB(‘key’, ‘target db’, ‘return type’)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dictdb-key-target-db-return-type-dict-depth-default-is-1">DictDB(‘key’, ‘target db’, ‘return type’, ‘dict depth (default is 1)’)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arraydb-key-target-db-return-type">ArrayDB(‘key’, ‘target db’, ‘return type’)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#external-decorator-external">external decorator (&#64;external)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#payable-decorator-payable">payable decorator (&#64;payable)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#eventlog-decorator-eventlog">eventlog decorator (&#64;eventlog)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fallback">fallback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interfacescore">InterfaceScore</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="limitation.html">Limitations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api-references.html">API References</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ICON Smart Contract - SCORE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Writing SCORE</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/writing-score.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="writing-score">
+<h1>Writing SCORE<a class="headerlink" href="#writing-score" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="type-hints">
+<h2>Type hints<a class="headerlink" href="#type-hints" title="Permalink to this headline">¶</a></h2>
+<p>Type hinting is highly recommended for the input parameters and return
+value. When querying SCORE’s APIs, API specification is generated based
+on its type hints. If type hints are not given, only function names will
+return.</p>
+<p>Example)</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@external</span><span class="p">(</span><span class="n">readonly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func1</span><span class="p">(</span><span class="n">arg1</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">arg2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>Possible data types for function parameters are <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>,
+<code class="docutils literal notranslate"><span class="pre">bytes</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>, <code class="docutils literal notranslate"><span class="pre">Address</span></code>. <code class="docutils literal notranslate"><span class="pre">List</span></code> and <code class="docutils literal notranslate"><span class="pre">Dict</span></code> type parameters
+are not supported yet.</p>
+<p>Returning types can be <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">bytes</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Address</span></code>, <code class="docutils literal notranslate"><span class="pre">List</span></code>, <code class="docutils literal notranslate"><span class="pre">Dict</span></code>.</p>
+</div>
+<div class="section" id="exception-handling">
+<h2>Exception handling<a class="headerlink" href="#exception-handling" title="Permalink to this headline">¶</a></h2>
+<p>When you handle exceptions in your contract, it is recommended to use <cite>revert</cite> function rather than using an exception inherited from <cite>IconServiceBaseException</cite>.</p>
+</div>
+<div class="section" id="iconscorebase-the-highest-parent-class">
+<h2>IconScoreBase (The highest parent class)<a class="headerlink" href="#iconscorebase-the-highest-parent-class" title="Permalink to this headline">¶</a></h2>
+<p>Every classes must inherit <code class="docutils literal notranslate"><span class="pre">IconScoreBase</span></code>. Contracts not derived from
+<code class="docutils literal notranslate"><span class="pre">IconScoreBase</span></code> can not be deployed.</p>
+</div>
+<div class="section" id="init">
+<h2>__init__<a class="headerlink" href="#init" title="Permalink to this headline">¶</a></h2>
+<p>This is a python init function. This function is called when the
+contract is loaded at each node.</p>
+<p>Member variables can be declared here, however, Declaring member
+variables which not managed by states is prohibited. Utilities of DB
+such as VarDB, DictDB, ArrayDB can be declared here as a member variable
+as follows.</p>
+<p>Example)</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">_total_supply</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_TOTAL_SUPPLY</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_decimals</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_DECIMALS</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_balances</span> <span class="o">=</span> <span class="n">DictDB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_BALANCES</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Also, parent’s init function must be called as follows.</p>
+<p>Example)</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="on-install">
+<h2>on_install<a class="headerlink" href="#on-install" title="Permalink to this headline">¶</a></h2>
+<p>This function is called when the contract is deployed for the first
+time, and will not be called again on contract update or deletion
+afterward. This is the place where you initialize the state DB.</p>
+</div>
+<div class="section" id="vardb-dictdb-arraydb">
+<h2>VarDB, DictDB, ArrayDB<a class="headerlink" href="#vardb-dictdb-arraydb" title="Permalink to this headline">¶</a></h2>
+<p>VarDB, DictDB, ArrayDB are utility classes wrapping the state DB. A
+<code class="docutils literal notranslate"><span class="pre">key</span></code> can be a number or characters, and <code class="docutils literal notranslate"><span class="pre">value_type</span></code> can be
+<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">Address</span></code>, and <code class="docutils literal notranslate"><span class="pre">bytes</span></code>. If the <code class="docutils literal notranslate"><span class="pre">key</span></code> does not
+exist, these classes return 0 when <code class="docutils literal notranslate"><span class="pre">value_type</span></code> is <code class="docutils literal notranslate"><span class="pre">int</span></code>, return “”
+when <code class="docutils literal notranslate"><span class="pre">str</span></code>, return <code class="docutils literal notranslate"><span class="pre">None</span></code> when the <code class="docutils literal notranslate"><span class="pre">value_type</span></code> is <code class="docutils literal notranslate"><span class="pre">Address</span></code> or
+<code class="docutils literal notranslate"><span class="pre">bytes</span></code>. VarDB can be used to store simple key-value state, and DictDB
+behaves more like python dict. DictDB does not maintain order, whereas
+ArrayDB, which supports length and iterator, maintains order.</p>
+<div class="section" id="vardb-key-target-db-return-type">
+<h3>VarDB(‘key’, ‘target db’, ‘return type’)<a class="headerlink" href="#vardb-key-target-db-return-type" title="Permalink to this headline">¶</a></h3>
+<p>Example) Setting <code class="docutils literal notranslate"><span class="pre">theloop</span></code> for the key <code class="docutils literal notranslate"><span class="pre">name</span></code> on the state DB:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">VarDB</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;theloop&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Example) Getting value by the key <code class="docutils literal notranslate"><span class="pre">name</span></code>:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="n">VarDB</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="c1">## &#39;theloop&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dictdb-key-target-db-return-type-dict-depth-default-is-1">
+<h3>DictDB(‘key’, ‘target db’, ‘return type’, ‘dict depth (default is 1)’)<a class="headerlink" href="#dictdb-key-target-db-return-type-dict-depth-default-is-1" title="Permalink to this headline">¶</a></h3>
+<p>Example 1) One-depth dict (test_dict1[‘key’]):</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_dict1</span> <span class="o">=</span> <span class="n">DictDB</span><span class="p">(</span><span class="s1">&#39;test_dict1&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">test_dict1</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">## set</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_dict1</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">])</span> <span class="c1">## get 1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">test_dict1</span><span class="p">[</span><span class="s1">&#39;nonexistence_key&#39;</span><span class="p">])</span> <span class="c1"># prints 0 (key does not exist and value_type=int)</span>
+</pre></div>
+</div>
+<p>Example 2) Two-depth dict (test_dict2[‘key1’][‘key2’]):</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_dict2</span> <span class="o">=</span> <span class="n">DictDB</span><span class="p">(</span><span class="s1">&#39;test_dict2&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">test_dict2</span><span class="p">[</span><span class="s1">&#39;key1&#39;</span><span class="p">][</span><span class="s1">&#39;key2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span> <span class="c1">## set</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_dict2</span><span class="p">[</span><span class="s1">&#39;key1&#39;</span><span class="p">][</span><span class="s1">&#39;key2&#39;</span><span class="p">])</span> <span class="c1">## get &#39;a&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">test_dict2</span><span class="p">[</span><span class="s1">&#39;key1&#39;</span><span class="p">][</span><span class="s1">&#39;nonexistent_key&#39;</span><span class="p">])</span> <span class="c1"># prints &quot;&quot; (key does not exist and value_type=str)</span>
+</pre></div>
+</div>
+<p>If the depth is more than 2, dict[key] returns new DictDB. Attempting to
+set a value to the wrong depth in the DictDB will raise an exception.</p>
+<p>Example 3)</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_dict3</span> <span class="o">=</span> <span class="n">DictDB</span><span class="p">(</span><span class="s1">&#39;test_dict3&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">test_dict3</span><span class="p">[</span><span class="s1">&#39;key1&#39;</span><span class="p">][</span><span class="s1">&#39;key2&#39;</span><span class="p">][</span><span class="s1">&#39;key3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">## ok</span>
+<span class="n">test_dict3</span><span class="p">[</span><span class="s1">&#39;key1&#39;</span><span class="p">][</span><span class="s1">&#39;key2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">## raise mismatch exception</span>
+
+<span class="n">test_dict2</span> <span class="o">=</span> <span class="n">test_dict3</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">][</span><span class="s1">&#39;key2&#39;</span><span class="p">]</span>
+<span class="n">test_dict2</span><span class="p">[</span><span class="s1">&#39;key1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">## ok</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="arraydb-key-target-db-return-type">
+<h3>ArrayDB(‘key’, ‘target db’, ‘return type’)<a class="headerlink" href="#arraydb-key-target-db-return-type" title="Permalink to this headline">¶</a></h3>
+<p>ArrayDB supports one dimensional array only. ArrayDB supports put, get,
+and pop. Does not support insert (adding elements in the middle of
+array).</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_array</span> <span class="o">=</span> <span class="n">ArrayDB</span><span class="p">(</span><span class="s1">&#39;test_array&#39;</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">value_type</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">test_array</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">test_array</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test_array</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">test_array</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_array</span><span class="p">))</span> <span class="c1">## prints 4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_array</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span> <span class="c1">## prints 3</span>
+<span class="n">test_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">## ok</span>
+<span class="c1"># test_array[100] = 1 ## error</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">test_array</span><span class="p">:</span> <span class="c1">## ok</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_array</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1">## ok</span>
+<span class="c1"># print(test_array[-100]) ## error</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="external-decorator-external">
+<h2>external decorator (&#64;external)<a class="headerlink" href="#external-decorator-external" title="Permalink to this headline">¶</a></h2>
+<p>Functions decorated with <code class="docutils literal notranslate"><span class="pre">&#64;external</span></code> can be called from outside the
+contract. These functions are registered on the exportable API list. Any
+attempt to call a non-external function from outside the contract will
+fail. If a function is decorated with ‘readonly’ parameters, i.e.,
+<code class="docutils literal notranslate"><span class="pre">&#64;external(readonly=True)</span></code>, the function will have read-only access to
+the state DB. This is similar to view keyword in Solidity. If the
+read-only external function is also decorated with <code class="docutils literal notranslate"><span class="pre">&#64;payable</span></code>, the
+function call will fail. Duplicate declaration of <code class="docutils literal notranslate"><span class="pre">&#64;external</span></code> will
+raise IconScoreException on import time.</p>
+</div>
+<div class="section" id="payable-decorator-payable">
+<h2>payable decorator (&#64;payable)<a class="headerlink" href="#payable-decorator-payable" title="Permalink to this headline">¶</a></h2>
+<p>Only functions with <code class="docutils literal notranslate"><span class="pre">&#64;payable</span></code> decorator are permitted to receive
+incoming ICX coins.  Transferring 0 icx is acceptable. If ICX coins
+(msg.value) are passed to a non-payable function, that transaction
+will fail.</p>
+</div>
+<div class="section" id="eventlog-decorator-eventlog">
+<h2>eventlog decorator (&#64;eventlog)<a class="headerlink" href="#eventlog-decorator-eventlog" title="Permalink to this headline">¶</a></h2>
+<p>Functions with <code class="docutils literal notranslate"><span class="pre">&#64;eventlog</span></code> decorator will include logs in its TxResult
+as ‘eventlogs’. It is recommended to declare a function without
+implementation body. Even if the function has a body, it does not be
+executed. When declaring a function, type hinting is a must. Without
+type hinting, transaction will fail. The default value for the parameter
+can be set.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">indexed</span></code> parameter is set in the decorator, designated number of
+parameters in the order of declaration will be indexed and included in
+the Bloom filter. At most 3 parameters can be indexed, And index can’t
+exceed the number of parameters(will raise an error). Indexed parameters
+and non-indexed parameters are separately stored in TxResult.</p>
+<p>Example)</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Declaration</span>
+<span class="nd">@eventlog</span>
+<span class="k">def</span> <span class="nf">FundTransfer1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_backer</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_isContribution</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span> <span class="k">pass</span>
+
+<span class="nd">@eventlog</span><span class="p">(</span><span class="n">indexed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># The first param (backer) will be indexed</span>
+<span class="k">def</span> <span class="nf">FundTransfer2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_backer</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">_amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_isContribution</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span> <span class="k">pass</span>
+
+<span class="c1"># Execution</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">FundTransfer1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">FundTransfer2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Possible data types for function parameters are primitive types (int,
+str, bytes, bool, Address). Array, Dictionary and None type parameter is
+not supported.</p>
+</div>
+<div class="section" id="fallback">
+<h2>fallback<a class="headerlink" href="#fallback" title="Permalink to this headline">¶</a></h2>
+<p>fallback function can not be decorated with <code class="docutils literal notranslate"><span class="pre">&#64;external</span></code>. (i.e.,
+fallback function is not allowed to be called by external contract or
+user.) This fallback function is executed whenever the contract receives
+plain icx coins without data. If the fallback function is not decorated
+with <code class="docutils literal notranslate"><span class="pre">&#64;payable</span></code>, the icx coin transfers to the contract will fail.</p>
+</div>
+<div class="section" id="interfacescore">
+<h2>InterfaceScore<a class="headerlink" href="#interfacescore" title="Permalink to this headline">¶</a></h2>
+<p>InterfaceScore is an interface class used to invoke other SCORE’s
+function. This interface should be used instead of legacy ‘call’
+function. Usage syntax is as follows.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TokenInterface</span><span class="p">(</span><span class="n">InterfaceScore</span><span class="p">):</span>
+    <span class="nd">@interface</span>
+    <span class="k">def</span> <span class="nf">transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr_to</span><span class="p">:</span> <span class="n">Address</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span> <span class="k">pass</span>
+</pre></div>
+</div>
+<p>If other SCORE has the function that has the same signature as defined
+here with <code class="docutils literal notranslate"><span class="pre">&#64;interface</span></code> decorator, then that function can be invoked
+via InterfaceScore class object. Like <code class="docutils literal notranslate"><span class="pre">&#64;eventlog</span></code> decorator, it is
+recommended to declare a function without implementation body. If there
+is a function body, it will be simply ignored.</p>
+<p>Example) You need to get an InterfaceScore object by using
+IconScoreBase’s built-in function
+<code class="docutils literal notranslate"><span class="pre">create_interface_score('score</span> <span class="pre">address',</span> <span class="pre">'interface</span> <span class="pre">class')</span></code>. Using
+the object, you can invoke other SCORE’s external function as if it is a
+local function call.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">token_score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_interface_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_addr_token_score</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">TokenInterface</span><span class="p">)</span>
+<span class="n">token_score</span><span class="o">.</span><span class="n">transfer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">sender</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="limitation.html" class="btn btn-neutral float-right" title="Limitations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="score-by-example.html" class="btn btn-neutral" title="SCORE by example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, ICON Foundation
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
