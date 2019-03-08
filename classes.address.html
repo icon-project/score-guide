@@ -17,34 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="AddressPrefix" href="classes.addressprefix.html" />
     <link rel="prev" title="IconScoreBase" href="classes.iconscorebase.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -169,119 +171,6 @@
             
   <div class="section" id="address">
 <h1>Address<a class="headerlink" href="#address" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="iconservice.base.address.Address">
-<em class="property">class </em><code class="descname">Address</code><span class="sig-paren">(</span><em>address_prefix: iconservice.base.address.AddressPrefix</em>, <em>address_body: bytes</em>, <em>ignore_length_validate: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#iconservice.base.address.Address" title="Permalink to this definition">¶</a></dt>
-<dd><p>Address class</p>
-<dl class="attribute">
-<dt id="iconservice.base.address.Address.body">
-<code class="descname">body</code><a class="headerlink" href="#iconservice.base.address.Address.body" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns 20-byte address body part</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">20 byte data standing for address</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="iconservice.base.address.Address.from_bytes">
-<em class="property">static </em><code class="descname">from_bytes</code><span class="sig-paren">(</span><em>buf: bytes</em><span class="sig-paren">)</span> &#x2192; iconservice.base.address.Address<a class="headerlink" href="#iconservice.base.address.Address.from_bytes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create Address object from bytes data</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>buf</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code> bytes data including Address information</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="#iconservice.base.address.Address" title="iconservice.base.address.Address"><code class="xref py py-class docutils literal notranslate"><span class="pre">Address</span></code></a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="iconservice.base.address.Address.from_data">
-<em class="property">static </em><code class="descname">from_data</code><span class="sig-paren">(</span><em>prefix: iconservice.base.address.AddressPrefix</em>, <em>data: bytes</em><span class="sig-paren">)</span><a class="headerlink" href="#iconservice.base.address.Address.from_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>creates an address object using given bytes</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>prefix</strong> – </li>
-<li><strong>data</strong> – </li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="iconservice.base.address.Address.from_string">
-<em class="property">static </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>address: str</em><span class="sig-paren">)</span><a class="headerlink" href="#iconservice.base.address.Address.from_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>creates an address object from given 42-char string <cite>address</cite></p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="#iconservice.base.address.Address" title="iconservice.base.address.Address"><code class="xref py py-class docutils literal notranslate"><span class="pre">Address</span></code></a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="iconservice.base.address.Address.is_contract">
-<code class="descname">is_contract</code><a class="headerlink" href="#iconservice.base.address.Address.is_contract" title="Permalink to this definition">¶</a></dt>
-<dd><p>Whether the address is SCORE</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True(contract) False(Not contract)</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="iconservice.base.address.Address.prefix">
-<code class="descname">prefix</code><a class="headerlink" href="#iconservice.base.address.Address.prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns address prefix part</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">AddressPrefix.EOA(0) or AddressPrefix.CONTRACT(1)</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="iconservice.base.address.Address.to_bytes">
-<code class="descname">to_bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bytes<a class="headerlink" href="#iconservice.base.address.Address.to_bytes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns data as bytes from the address object</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code> data including information of Address object</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -295,7 +184,7 @@
         <a href="classes.addressprefix.html" class="btn btn-neutral float-right" title="AddressPrefix" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="classes.iconscorebase.html" class="btn btn-neutral" title="IconScoreBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="classes.iconscorebase.html" class="btn btn-neutral float-left" title="IconScoreBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -321,26 +210,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
