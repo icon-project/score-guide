@@ -17,36 +17,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Icx" href="classes.icx.html" />
     <link rel="prev" title="AddressPrefix" href="classes.addressprefix.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -171,6 +169,45 @@
             
   <div class="section" id="transaction">
 <h1>Transaction<a class="headerlink" href="#transaction" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="iconservice.base.transaction.Transaction">
+<em class="property">class </em><code class="descname">Transaction</code><span class="sig-paren">(</span><em>tx_hash: Optional[bytes] = None</em>, <em>index: int = 0</em>, <em>origin: Optional[Address] = None</em>, <em>timestamp: int = None</em>, <em>nonce: int = None</em><span class="sig-paren">)</span><a class="headerlink" href="#iconservice.base.transaction.Transaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains transaction info</p>
+<dl class="attribute">
+<dt id="iconservice.base.transaction.Transaction.hash">
+<code class="descname">hash</code><a class="headerlink" href="#iconservice.base.transaction.Transaction.hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transaction hash</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iconservice.base.transaction.Transaction.index">
+<code class="descname">index</code><a class="headerlink" href="#iconservice.base.transaction.Transaction.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transaction index in a block</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iconservice.base.transaction.Transaction.nonce">
+<code class="descname">nonce</code><a class="headerlink" href="#iconservice.base.transaction.Transaction.nonce" title="Permalink to this definition">¶</a></dt>
+<dd><p>(optional)
+nonce of a transaction request.
+random value</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iconservice.base.transaction.Transaction.origin">
+<code class="descname">origin</code><a class="headerlink" href="#iconservice.base.transaction.Transaction.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>The account who created the transaction.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iconservice.base.transaction.Transaction.timestamp">
+<code class="descname">timestamp</code><a class="headerlink" href="#iconservice.base.transaction.Transaction.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Timestamp of a transaction request in microseconds
+This is NOT a block timestamp</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -184,7 +221,7 @@
         <a href="classes.icx.html" class="btn btn-neutral float-right" title="Icx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="classes.addressprefix.html" class="btn btn-neutral float-left" title="AddressPrefix" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="classes.addressprefix.html" class="btn btn-neutral" title="AddressPrefix" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -210,16 +247,26 @@
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

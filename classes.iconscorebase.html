@@ -17,36 +17,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Address" href="classes.address.html" />
     <link rel="prev" title="Classes" href="classes.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -171,6 +169,207 @@
             
   <div class="section" id="iconscorebase">
 <h1>IconScoreBase<a class="headerlink" href="#iconscorebase" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase">
+<em class="property">class </em><code class="descname">IconScoreBase</code><span class="sig-paren">(</span><em>db: iconservice.database.db.IconScoreDatabase</em><span class="sig-paren">)</span><a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>A base class of SCOREs. this class provides facilities and environments to SCORE to run.</p>
+<dl class="function">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>self</em>, <em>db: iconservice.database.db.IconScoreDatabase</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>A python init function. Invoked when the contract is loaded at each node.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.on_install">
+<code class="descname">on_install</code><span class="sig-paren">(</span><em>self</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.on_install" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invoked when the contract is deployed for the first time, and will not be called again on contract update or deletion afterward.
+This is the place where you initialize the state DB.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.on_update">
+<code class="descname">on_update</code><span class="sig-paren">(</span><em>self</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.on_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invoked when the contract is deployed for update
+This is the place where you migrate old states.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.fallback">
+<code class="descname">fallback</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.fallback" title="Permalink to this definition">¶</a></dt>
+<dd><p>fallback function can not be decorated with <cite>&#64;external</cite>. (i.e., fallback function is not allowed to be called by external contract or user.)
+This fallback function is executed whenever the contract receives plain icx coins without data.
+If the fallback function is not decorated with <cite>&#64;payable</cite>, the icx coin transfers to the contract will fail.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.call">
+<code class="descname">call</code><span class="sig-paren">(</span><em>self</em>, <em>addr_to: iconservice.base.address.Address</em>, <em>func_name: str</em>, <em>kw_dict: dict</em>, <em>amount: int = 0</em><span class="sig-paren">)</span><a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call external function provided by other IconScore with arguments without fallback</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>addr_to</strong> – <a class="reference internal" href="classes.address.html#iconservice.base.address.Address" title="iconservice.base.address.Address"><code class="xref py py-class docutils literal notranslate"><span class="pre">Address</span></code></a> the address of other IconScore</li>
+<li><strong>func_name</strong> – function name provided by other IconScore</li>
+<li><strong>kw_dict</strong> – Arguments of the external function</li>
+<li><strong>amount</strong> – ICX value to enclose with. in loop.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">returning value of the external function</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.create_interface_score">
+<code class="descname">create_interface_score</code><span class="sig-paren">(</span><em>self, addr_to: iconservice.base.address.Address, interface_cls: Callable[[Address, callable], T]</em><span class="sig-paren">)</span> &#x2192; T<a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.create_interface_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an object, through which you have an access to the designated SCORE’s external functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>addr_to</strong> – SCORE address</li>
+<li><strong>interface_cls</strong> – interface class</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">An instance of given class</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.now">
+<code class="descname">now</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.IconScoreBase.now" title="Permalink to this definition">¶</a></dt>
+<dd><p>Timestamp of current block in microseconds</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">timestamp in microseconds</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.msg">
+<code class="descname">msg</code><a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.msg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds information of calling the SCORE</p>
+<ul class="simple">
+<li>msg.sender : Address of the account who called this function. If
+other contact called this function, msg.sender points to the caller
+contract’s address.</li>
+<li>msg.value : Amount of icx that the sender attempts to transfer to the
+current SCORE.</li>
+</ul>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.address">
+<code class="descname">address</code><a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.address" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current SCORE address</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="classes.address.html#iconservice.base.address.Address" title="iconservice.base.address.Address"><code class="xref py py-class docutils literal notranslate"><span class="pre">Address</span></code></a> current address</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.tx">
+<code class="descname">tx</code><a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.tx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds information of the transaction</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="classes.transaction.html#iconservice.base.transaction.Transaction" title="iconservice.base.transaction.Transaction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Transaction</span></code></a> transaction</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.db">
+<code class="descname">db</code><a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.db" title="Permalink to this definition">¶</a></dt>
+<dd><p>An instance used to access state DB</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="classes.db.html#iconservice.database.db.IconScoreDatabase" title="iconservice.database.db.IconScoreDatabase"><code class="xref py py-class docutils literal notranslate"><span class="pre">IconScoreDatabase</span></code></a> db</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.owner">
+<code class="descname">owner</code><a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.owner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Address of the account who deployed the contract</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="classes.address.html#iconservice.base.address.Address" title="iconservice.base.address.Address"><code class="xref py py-class docutils literal notranslate"><span class="pre">Address</span></code></a> owner address</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.icx">
+<code class="descname">icx</code><a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.icx" title="Permalink to this definition">¶</a></dt>
+<dd><p>An object used to transfer icx coin</p>
+<ul class="simple">
+<li>icx.transfer(addr_to(address), amount(integer)) -&gt; bool Transfers
+designated amount of icx coin to <code class="docutils literal notranslate"><span class="pre">addr_to</span></code>. If exception occurs
+during execution, the exception will be escalated. Returns True if
+coin transfer succeeds.</li>
+<li>icx.send(addr_to(address), amount(integer)) -&gt; bool Sends designated
+amount of icx coin to <code class="docutils literal notranslate"><span class="pre">addr_to</span></code>. Basic behavior is same as
+transfer, the difference is that exception is caught inside the
+function. Returns True when coin transfer succeeded, False when
+failed.</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="classes.icx.html#iconservice.iconscore.icx.Icx" title="iconservice.iconscore.icx.Icx"><code class="xref py py-class docutils literal notranslate"><span class="pre">Icx</span></code></a> instance of icx</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="iconservice.iconscore.icon_score_base.IconScoreBase.block_height">
+<code class="descname">block_height</code><a class="headerlink" href="#iconservice.iconscore.icon_score_base.IconScoreBase.block_height" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>Current block height</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">current block height</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -184,7 +383,7 @@
         <a href="classes.address.html" class="btn btn-neutral float-right" title="Address" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="classes.html" class="btn btn-neutral float-left" title="Classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="classes.html" class="btn btn-neutral" title="Classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -210,16 +409,26 @@
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -17,36 +17,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="IconScoreDatabase" href="classes.db.html" />
     <link rel="prev" title="Transaction" href="classes.transaction.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -171,6 +169,69 @@
             
   <div class="section" id="icx">
 <h1>Icx<a class="headerlink" href="#icx" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="iconservice.iconscore.icx.Icx">
+<em class="property">class </em><code class="descname">Icx</code><span class="sig-paren">(</span><em>context: IconScoreContext</em>, <em>address: Address</em><span class="sig-paren">)</span><a class="headerlink" href="#iconservice.iconscore.icx.Icx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for handling ICX coin transfer
+These functions are intended to be used for SCORE development.</p>
+<dl class="method">
+<dt id="iconservice.iconscore.icx.Icx.get_balance">
+<code class="descname">get_balance</code><span class="sig-paren">(</span><em>address: iconservice.base.address.Address</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#iconservice.iconscore.icx.Icx.get_balance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the ICX balance of given address</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>address</strong> – address</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">ICX balance of given address</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iconservice.iconscore.icx.Icx.send">
+<code class="descname">send</code><span class="sig-paren">(</span><em>addr_to: iconservice.base.address.Address</em>, <em>amount: int</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#iconservice.iconscore.icx.Icx.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>transfer the amount of icx to the given ‘addr_to’</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>addr_to</strong> – receiver address</li>
+<li><strong>amount</strong> – the amount of icx to transfer</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True(success) False(failed)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iconservice.iconscore.icx.Icx.transfer">
+<code class="descname">transfer</code><span class="sig-paren">(</span><em>addr_to: iconservice.base.address.Address</em>, <em>amount: int</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#iconservice.iconscore.icx.Icx.transfer" title="Permalink to this definition">¶</a></dt>
+<dd><p>transfer the amount of icx to the given ‘addr_to’
+If failed, an exception will be raised</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>addr_to</strong> – receiver address</li>
+<li><strong>amount</strong> – the amount of icx to transfer</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -184,7 +245,7 @@
         <a href="classes.db.html" class="btn btn-neutral float-right" title="IconScoreDatabase" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="classes.transaction.html" class="btn btn-neutral float-left" title="Transaction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="classes.transaction.html" class="btn btn-neutral" title="Transaction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -210,16 +271,26 @@
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -17,36 +17,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="ArrayDB" href="classes.arraydb.html" />
     <link rel="prev" title="Icx" href="classes.icx.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -171,6 +169,77 @@
             
   <div class="section" id="iconscoredatabase">
 <h1>IconScoreDatabase<a class="headerlink" href="#iconscoredatabase" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="iconservice.database.db.IconScoreDatabase">
+<em class="property">class </em><code class="descname">IconScoreDatabase</code><span class="sig-paren">(</span><em>address: Address</em>, <em>context_db: ContextDatabase</em>, <em>prefix: bytes = None</em><span class="sig-paren">)</span><a class="headerlink" href="#iconservice.database.db.IconScoreDatabase" title="Permalink to this definition">¶</a></dt>
+<dd><p>It is used in IconScore</p>
+<p>IconScore can access its states only through IconScoreDatabase</p>
+<dl class="method">
+<dt id="iconservice.database.db.IconScoreDatabase.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><em>key: bytes</em><span class="sig-paren">)</span><a class="headerlink" href="#iconservice.database.db.IconScoreDatabase.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes the key/value pair for the specified key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> – key to delete</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iconservice.database.db.IconScoreDatabase.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>key: bytes</em><span class="sig-paren">)</span> &#x2192; bytes<a class="headerlink" href="#iconservice.database.db.IconScoreDatabase.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the value for the specified key</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> – key to retrieve</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">value for the specified key, or None if not found</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iconservice.database.db.IconScoreDatabase.get_sub_db">
+<code class="descname">get_sub_db</code><span class="sig-paren">(</span><em>prefix: bytes</em><span class="sig-paren">)</span> &#x2192; iconservice.database.db.IconScoreDatabase<a class="headerlink" href="#iconservice.database.db.IconScoreDatabase.get_sub_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns sub db with a prefix</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prefix</strong> – The prefix used by this sub db.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">sub db</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iconservice.database.db.IconScoreDatabase.put">
+<code class="descname">put</code><span class="sig-paren">(</span><em>key: bytes</em>, <em>value: bytes</em><span class="sig-paren">)</span><a class="headerlink" href="#iconservice.database.db.IconScoreDatabase.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a value for the specified key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> – key to set</li>
+<li><strong>value</strong> – value to set</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -184,7 +253,7 @@
         <a href="classes.arraydb.html" class="btn btn-neutral float-right" title="ArrayDB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="classes.icx.html" class="btn btn-neutral float-left" title="Icx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="classes.icx.html" class="btn btn-neutral" title="Icx" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -210,16 +279,26 @@
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

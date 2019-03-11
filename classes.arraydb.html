@@ -17,36 +17,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="DictDB" href="classes.dictdb.html" />
     <link rel="prev" title="IconScoreDatabase" href="classes.db.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -171,6 +169,57 @@
             
   <div class="section" id="arraydb">
 <h1>ArrayDB<a class="headerlink" href="#arraydb" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="iconservice.iconscore.icon_container_db.ArrayDB">
+<em class="property">class </em><code class="descname">ArrayDB</code><span class="sig-paren">(</span><em>var_key: str</em>, <em>db: IconScoreDatabase</em>, <em>value_type: type</em><span class="sig-paren">)</span><a class="headerlink" href="#iconservice.iconscore.icon_container_db.ArrayDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility classes wrapping the state DB.
+supports length and iterator, maintains order</p>
+<dl class="method">
+<dt id="iconservice.iconscore.icon_container_db.ArrayDB.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>index: int = 0</em><span class="sig-paren">)</span> &#x2192; V<a class="headerlink" href="#iconservice.iconscore.icon_container_db.ArrayDB.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the value at index</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> – index</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">value at the index</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iconservice.iconscore.icon_container_db.ArrayDB.pop">
+<code class="descname">pop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional[V]<a class="headerlink" href="#iconservice.iconscore.icon_container_db.ArrayDB.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets and removes last added value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">last added value</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="iconservice.iconscore.icon_container_db.ArrayDB.put">
+<code class="descname">put</code><span class="sig-paren">(</span><em>value: V</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#iconservice.iconscore.icon_container_db.ArrayDB.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Puts the value at the end of array</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> – value to add</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -184,7 +233,7 @@
         <a href="classes.dictdb.html" class="btn btn-neutral float-right" title="DictDB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="classes.db.html" class="btn btn-neutral float-left" title="IconScoreDatabase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="classes.db.html" class="btn btn-neutral" title="IconScoreDatabase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -210,16 +259,26 @@
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
